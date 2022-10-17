@@ -10,9 +10,6 @@ import { CartComponent } from './cart/cart.component';
 import { AccountComponent } from './account/account.component';
 import { SearchComponent } from './search/search.component';
 import { IntroComponent } from './intro/intro.component';
-import { HighgradeComponent } from './category/highgrade/highgrade.component';
-import { RealgradeComponent } from './category/realgrade/realgrade.component';
-import { MastergradeComponent } from './category/mastergrade/mastergrade.component';
 import { HighGradeComponent } from './category/high-grade/high-grade.component';
 import { RealGradeComponent } from './category/real-grade/real-grade.component';
 import { MasterGradeComponent } from './category/master-grade/master-grade.component';
@@ -29,9 +26,6 @@ import { ToolComponent } from './category/tool/tool.component';
     AccountComponent,
     SearchComponent,
     IntroComponent,
-    HighgradeComponent,
-    RealgradeComponent,
-    MastergradeComponent,
     HighGradeComponent,
     RealGradeComponent,
     MasterGradeComponent,
