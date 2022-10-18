@@ -15,6 +15,8 @@ import { RealGradeComponent } from './category/real-grade/real-grade.component';
 import { MasterGradeComponent } from './category/master-grade/master-grade.component';
 import { PerfectGradeComponent } from './category/perfect-grade/perfect-grade.component';
 import { ToolComponent } from './category/tool/tool.component';
+import { NavbarComponent } from './component/navbar/navbar.component';
+import { SearchComponent } from './component/search/search.component';
 
 
 @NgModule({
@@ -30,7 +32,9 @@ import { ToolComponent } from './category/tool/tool.component';
     RealGradeComponent,
     MasterGradeComponent,
     PerfectGradeComponent,
-    ToolComponent
+    ToolComponent,
+    NavbarComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
