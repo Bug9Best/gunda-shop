@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { PrimeNGModule } from './modules/primeng.module';
 
 import { IntroComponent } from './intro/intro.component';
 import { HomeComponent } from './home/home.component';
@@ -16,7 +17,8 @@ import { MasterGradeComponent } from './category/master-grade/master-grade.compo
 import { PerfectGradeComponent } from './category/perfect-grade/perfect-grade.component';
 import { ToolComponent } from './category/tool/tool.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
-import { SearchComponent } from './component/search/search.component';
+import { ModalComponent } from './component/modal/modal.component';
+import { SearchComponent } from './search/search.component';
 
 
 @NgModule({
@@ -34,11 +36,13 @@ import { SearchComponent } from './component/search/search.component';
     PerfectGradeComponent,
     ToolComponent,
     NavbarComponent,
-    SearchComponent
+    SearchComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    PrimeNGModule,
   ],
 
   providers: [],

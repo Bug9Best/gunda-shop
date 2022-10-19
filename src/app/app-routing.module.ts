@@ -11,6 +11,7 @@ import { RealGradeComponent } from './category/real-grade/real-grade.component';
 import { MasterGradeComponent } from './category/master-grade/master-grade.component';
 import { PerfectGradeComponent } from './category/perfect-grade/perfect-grade.component';
 import { ToolComponent } from './category/tool/tool.component';
+import { SearchComponent } from './search/search.component';
 
 
 const routes: Routes = [
@@ -57,6 +58,10 @@ const routes: Routes = [
   {
     path: "category/tool",
     component: ToolComponent
+  },
+  {
+    path: "search",
+    component: SearchComponent
   },
   {
     path: "",
