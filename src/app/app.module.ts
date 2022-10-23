@@ -19,6 +19,10 @@ import { ToolComponent } from './category/tool/tool.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { ModalComponent } from './component/modal/modal.component';
 import { SearchComponent } from './search/search.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 
 @NgModule({
@@ -43,6 +47,9 @@ import { SearchComponent } from './search/search.component';
     BrowserModule,
     AppRoutingModule,
     PrimeNGModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
   ],
 
   providers: [],
