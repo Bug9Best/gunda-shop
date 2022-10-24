@@ -12,7 +12,7 @@ export const environment = {
     authDomain: 'gunda-shop.firebaseapp.com',
     messagingSenderId: '686247224652',
   },
-  production: false
+  production: true
 };
 
 /*
