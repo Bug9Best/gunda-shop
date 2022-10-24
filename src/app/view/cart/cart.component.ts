@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { getDocs, Firestore, collection } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-cart',
@@ -7,9 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
-  constructor() { }
+  constructor(public firestore: Firestore) { }
 
   ngOnInit(): void {
   }
-
 }

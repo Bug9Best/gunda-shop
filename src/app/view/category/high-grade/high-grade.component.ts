@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { getDocs, Firestore, collection } from '@angular/fire/firestore';
 
 @Component({
-  selector: 'app-tool',
-  templateUrl: './tool.component.html',
-  styleUrls: ['./tool.component.scss']
+  selector: 'app-high-grade',
+  templateUrl: './high-grade.component.html',
+  styleUrls: ['./high-grade.component.scss']
 })
-export class ToolComponent implements OnInit {
-  public toolList: any = [];
+export class HighGradeComponent implements OnInit {
+  public highGradeList: any = [];
 
   constructor(public firestore: Firestore) {
     this.getData();
@@ -17,12 +17,11 @@ export class ToolComponent implements OnInit {
   }
 
   getData() {
-    const firebase = collection(this.firestore, 'tool');
+    const firebase = collection(this.firestore, 'high-grade');
     getDocs(firebase).then((response) => {
-      this.toolList = [...response.docs.map((item) => {
+      this.highGradeList = [...response.docs.map((item) => {
         return { ...item.data(), id: item.id }
       })]
-      console.log(this.toolList);
     })
   }
 }
