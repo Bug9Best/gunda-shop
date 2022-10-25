@@ -6,13 +6,15 @@
             <label class="mt-8 flex justify-center text-3xl font-bold text-gray-900">เข้าสู่ระบบด้วยบัญชีของคุณ</label>
         </div>
 
-        <form class="mt-16 space-y-6" #loginForm="ngForm" (ngSubmit)="checkUser(loginForm.value)">
-            <input type="hidden" name="remember" value="true">
+        <form class="mt-16 space-y-6" [formGroup]="loginForm" (ngSubmit)="login()">
             <div class="rounded-md shadow-sm">
-                <input type="email" id="email" name="email" class="input" placeholder="อีเมล" ngModel required>
+                <input type="email" class="input" placeholder="อีเมล (Example@gmail.com)" formControlName="email" required>
+                <span *ngIf="!loginForm.get('email')?.valid" class="invalid-input" [hidden]="showValid">กรอกอีเมลให้ครบถ้วน</span>
             </div>
+
             <div class="rounded-md shadow-sm">
-                <input type="password" id="password" name="password" class="input" placeholder="รหัสผ่าน" ngModel required>
+                <input type="password" class="input" placeholder="รหัสผ่าน (อย่างน้อย 8 ตัวอักษร)" formControlName="password" required>
+                <span *ngIf="!loginForm.get('password')?.valid" class="invalid-input" [hidden]="showValid">กรอกรหัสให้ครบถ้วน</span>
             </div>
 
             <div class="flex items-center justify-between">
@@ -29,7 +31,7 @@
 
             <button type="submit" class="button-primary">เข้าสู่ระบบ</button>
         </form>
-        <label class="flex justify-center text-md text-gray-900">หากคุณยังไม่มีบัญชีผู้ใช้
+        <label class="flex justify-center text-md text-gray-900 mt-3">หากคุณยังไม่มีบัญชีผู้ใช้
             <a routerLink="../register" class="ml-3 text-md text-green-600">ลงทะเบียนที่นี่</a>
         </label>
     </div>

@@ -14,7 +14,7 @@
             </div>
 
             <div class="rounded-md shadow-sm">
-                <input type="email" formControlName="email" class="input" placeholder="อีเมล" required>
+                <input type="email" formControlName="email" class="input" placeholder="อีเมล (Example@gmail.com)" required>
                 <span *ngIf="!userForm.get('email')?.valid" class="invalid-input" [hidden]="showValid">กรอกอีเมลให้ครบถ้วน</span>
             </div>
             <div class="rounded-md shadow-sm p-fluid ">
