@@ -56,4 +56,10 @@
         @apply rounded-lg border border-neutral-300 group-hover:opacity-90 group-hover:border-neutral-800
         shadow-[inset_00_-15px_50px_1px_rgba(0,0,0,0.15)];
     }
+
+    .invalid-input{
+        @apply text-red-500 text-sm ml-2;
+    }
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
