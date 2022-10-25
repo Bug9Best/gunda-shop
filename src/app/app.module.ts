@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,15 +20,17 @@ import { ToolComponent } from './view/category/tool/tool.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { ModalComponent } from './component/modal/modal.component';
 import { SearchComponent } from './view/search/search.component';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { MessageService } from 'primeng/api';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+
     IntroComponent,
     HomeComponent,
     AccountComponent,
@@ -45,6 +48,8 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     PrimeNGModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -52,7 +57,9 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     provideFirestore(() => getFirestore()),
   ],
 
-  providers: [],
+  providers: [
+    MessageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
