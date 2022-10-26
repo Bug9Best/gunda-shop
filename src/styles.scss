@@ -1,4 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+html, body { height: 100%; }
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,12 +13,12 @@
 @layer components {
 
     .item-navbar{
-        @apply px-3 py-2 rounded-md text-sm font-medium
+        @apply px-3 py-2 rounded-md text-base font-bold
         text-neutral-100
         hover:bg-neutral-700 hover:text-white;
     }
     .item-navbar-active{
-        @apply px-3 py-2 rounded-md text-sm font-medium
+        @apply px-3 py-2 rounded-md text-base font-bold
         bg-neutral-700 text-white  
         hover:bg-neutral-700 hover:text-white;
     }
@@ -24,22 +30,22 @@
 
     .button-primary {
         @apply flex w-full justify-center rounded-md border border-transparent py-2 px-4 
-        bg-neutral-600 text-lg text-white 
-        hover:bg-neutral-700 
+        bg-neutral-700 text-lg text-white 
+        hover:bg-neutral-800 
         focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2;
     }
 
     .button-secondary {
         @apply flex w-full justify-center rounded-md border border-transparent py-2 px-4 
-        bg-inherit text-lg text-neutral-600 border-neutral-600
-        hover:bg-inherit  hover:text-neutral-700 hover:border-neutral-700
+        bg-inherit text-lg text-neutral-700 border-neutral-700
+        hover:bg-inherit  hover:text-neutral-800 hover:border-neutral-800
         focus:outline-none focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2;
     }
 
     .button-tertiary  {
         @apply flex w-full justify-center rounded-md border border-transparent py-2 px-4 
-        bg-inherit text-lg text-neutral-600
-        hover:bg-inherit  hover:text-neutral-700
+        bg-inherit text-lg text-neutral-700
+        hover:bg-inherit  hover:text-neutral-800
     }
 
     .category-title {
@@ -60,6 +66,14 @@
     .invalid-input{
         @apply text-red-500 text-sm ml-2;
     }
+
+    .avatar {
+        @apply flex items-center justify-center
+        text-white font-bold text-base h-8 w-8 rounded-full bg-gray-600 p-3;
+    }
+    
+    .avatar-active {
+        @apply rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800;
+    }
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
