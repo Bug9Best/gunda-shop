@@ -4,13 +4,14 @@ import {
   doc,
   docData,
   Firestore,
-  getDoc,
+  getDocs,
   setDoc,
   updateDoc,
 } from '@angular/fire/firestore';
 import { from, Observable, of, switchMap } from 'rxjs';
 import { User } from 'src/app/model/user';
 import { AuthenService } from '../authen/authen.service';
+
 
 
 @Injectable({
@@ -20,29 +21,29 @@ export class UserService {
 
   constructor(
     private firestore: Firestore,
-    private authService: AuthenService
+    private authService: AuthenService,
   ) { }
 
-  get currentUser$(): Observable<User | null> {
+  getCurrentUser(): Observable<User | null> {
     return this.authService.currentUser$.pipe(
       switchMap((user) => {
         if (!user?.uid) {
           return of(null);
         }
 
-        const ref = doc(this.firestore, 'users', user?.uid);
+        const ref = doc(this.firestore, 'users', user?.uid)
         return docData(ref) as Observable<User>;
       })
     );
   }
 
-  addUser(user: User){
-    const data = doc(this.firestore, 'users', user.uid);
-    return from(setDoc(data, user));
+  addUser(user: User): Observable<void> {
+    const ref = doc(this.firestore, 'users', user.uid);
+    return from(setDoc(ref, user));
   }
 
-  updateUser(user: User){
-    const data = doc(this.firestore, 'users', user.uid);
-    return from(updateDoc(data, { ...user }));
+  updateUser(user: User): Observable<void> {
+    const ref = doc(this.firestore, 'users', user.uid);
+    return from(updateDoc(ref, { ...user }));
   }
 }
