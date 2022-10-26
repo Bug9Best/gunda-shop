@@ -1,0 +1,33 @@
+<div class="flex items-center justify-center my-auto px-4" style="height: calc(100vh - 64px);">
+    <div class="w-full max-w-xl">
+        <label class="mt-8 flex justify-center text-3xl font-bold text-gray-900">สมัครบัญชีผู้ใช้งาน</label>
+
+        <form [formGroup]="userForm" (ngSubmit)="submit()" class="mt-16 space-y-6">
+            <div class="rounded-md shadow-sm">
+                <input type="text" formControlName="firstname" class="input" placeholder="ชื่อ" required>
+                <span *ngIf="!userForm.get('firstname')?.valid" class="invalid-input" [hidden]="showValid">กรอกชื่อให้ครบถ้วน</span>
+            </div>
+
+            <div class="rounded-md shadow-sm">
+                <input type="text" formControlName="lastname" class="input" placeholder="นามสกุล" required>
+                <span *ngIf="!userForm.get('lastname')?.valid" class="invalid-input" [hidden]="showValid">กรอกนามสกุลให้ครบถ้วน</span>
+            </div>
+
+            <div class="rounded-md shadow-sm">
+                <input type="email" formControlName="email" class="input" placeholder="อีเมล (Example@gmail.com)" required>
+                <span *ngIf="!userForm.get('email')?.valid" class="invalid-input" [hidden]="showValid">กรอกอีเมลให้ครบถ้วน</span>
+            </div>
+            <div class="rounded-md shadow-sm p-fluid ">
+                <input type="password" formControlName="password" class="input" placeholder="รหัสผ่าน (อย่างน้อย 8 ตัวอักษร)" required >
+                <span *ngIf="!userForm.get('password')?.valid" class="invalid-input" [hidden]="showValid">กรอกรหัสผ่านให้ครบถ้วน </span>
+            </div>
+            <div class="rounded-md shadow-sm">
+                <input type="password" formControlName="confirmPassword" class="input" placeholder="ยืนยันรหัสผ่าน (อย่างน้อย 8 ตัวอักษร)" required>
+                <span *ngIf="!userForm.get('confirmPassword')?.valid" class="invalid-input" [hidden]="showValid">กรอกรหัสผ่านให้ครบถ้วน</span>
+                <span *ngIf="userForm.errors?.['passwordsDontMatch']" class="invalid-input" [hidden]="showValid">รหัสผ่านไม่ตรงกัน</span>
+            </div>
+
+            <button type="submit" class="button-primary">ยืนยัน</button>
+        </form>
+    </div>
+</div>
