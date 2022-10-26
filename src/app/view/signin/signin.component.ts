@@ -1,20 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenService } from 'src/app/service/authen/authen.service';
 import { Router } from '@angular/router';
-import {
-  Auth,
-  signInWithEmailAndPassword,
-  isSignInWithEmailLink,
-  createUserWithEmailAndPassword
-} from '@angular/fire/auth';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  NonNullableFormBuilder
-} from '@angular/forms';
-import { getDocs, Firestore, collection } from '@angular/fire/firestore';
+import { Auth, } from '@angular/fire/auth';
+import { FormGroup, FormControl, Validators, } from '@angular/forms';
 import { MessageService } from 'primeng/api';
+
 
 
 
@@ -28,7 +18,7 @@ export class SigninComponent implements OnInit {
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required,Validators.minLength(8)]),
+    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
   });
 
 
@@ -64,10 +54,10 @@ export class SigninComponent implements OnInit {
       return;
     }
 
-    this.authenService
-      .signUp(email, password)
-      .subscribe(() => {
+    this.authenService.signin(email, password).subscribe((user) => {
+      if (user) {
         this.router.navigate(['/home']);
-      });
+      }
+    })
   }
 }
