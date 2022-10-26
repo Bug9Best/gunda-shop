@@ -37,7 +37,5 @@ export class NavbarComponent implements OnInit {
       this.userData.email = user?.email;
       this.userData.photoURL = user?.photoURL;
     });
-
-    console.log(this.userData);
   }
 }

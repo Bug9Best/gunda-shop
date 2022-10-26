@@ -23,7 +23,7 @@
             </div>
             <div class="hidden md:block">
                 <div class="ml-4 flex items-center md:ml-6">
-                    <button type="button" class="text-gray-400 hover:text-white" routerLink="/cart">
+                    <button type="button" class="text-gray-400 hover:text-white" routerLink="/cart" (click)="authenService.signout()">
                         <i class="pi pi-shopping-cart p-2" style="font-size: 1.25rem"></i>
                     </button>
 
