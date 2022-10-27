@@ -14,15 +14,71 @@
     <div class="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
-            <div *ngFor="let highGrade of highGradeList" class="group relative">
+            <div *ngFor="let highGrade of highGradeList" class="group relative" (click)="showDetail(highGrade.id)">
                 <div class="min-h-80 w-full aspect-w-1 aspect-h-1 lg:aspect-none lg:h-80 overflow-hidden category-item">
-                    <img [src]="highGrade.productURL" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                    <img [src]="highGrade.productURL"
+                        class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                 </div>
                 <div class="mt-4 flex justify-between px-3">
                     <p class="text-lg text-gray-700"><a href="#">{{ highGrade.name }}</a></p>
-                    <p class="text-lg font-bold text-gray-900">{{ highGrade.price | currency:'THB':'symbol-narrow':'' }}</p>
+                    <p class="text-lg font-bold text-gray-900">{{ highGrade.price | currency:'THB':'symbol-narrow':'' }}
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 </main>
+
+<p-dialog [(visible)]="showDialog" [resizable]="false" [modal]="true" [draggable]="false" [style]="{width: '75vw'}">
+    <div class="grid grid-flow-row-dense grid-cols-12">
+        <div class="col-span-5">
+            <p-carousel *ngIf="productDetail" [value]="images" [numVisible]="1" [numScroll]="1">
+                <ng-template let-images pTemplate="item" class="flex justify-center items-center overflow-hidden">
+                    <img [src]="images.src" class="object-bottom bg-gray-100 rounded-md">
+                </ng-template>
+            </p-carousel>
+        </div>
+        <p-divider layout="vertical"></p-divider>
+        <div class="col-span-5">
+            <p class="text-3xl font-bold mb-2"> {{ productDetail.name }} </p>
+            <p class="text-2xl font-bold"> {{ productDetail.price }} Bath </p>
+            <p-divider></p-divider>
+            <p class="text-xl font-bold">Serires : {{ productDetail.series }}</p>
+            <p class="text-xl font-bold">คุณสมบัติ</p>
+            <div class="flex items-center mt-3">
+                <i class="pi pi-circle-fill mx-5 mt-1" style="font-size: 0.5rem"></i>
+                <p class="text-xl"><b>Brand</b> : BANDAI</p>
+            </div>
+            <p class="text-xl ml-12"><b>Origin</b> : Japan</p>
+            <p class="text-xl ml-12"><b>Product Type</b> : Gunpla Plastic</p>
+
+            <div class="flex items-center mt-3">
+                <i class="pi pi-circle-fill mx-5 mt-1" style="font-size: 0.5rem"></i>
+                <p class="text-xl"><b>Model Kit</b></p>
+            </div>
+            <p class="text-xl ml-12"><b>Model Scale</b> : 1/144</p>
+            <p class="text-xl ml-12"><b>Model Heigth</b> : 13 cm.</p>
+
+            <div class="flex items-center mt-3">
+                <i class="pi pi-circle-fill mx-5 mt-1" style="font-size: 0.5rem"></i>
+                <p class="text-xl"><b>Model Kit Contains</b></p>
+            </div>
+            <p class="text-xl ml-12">Gundam Model x 1</p>
+            <p class="text-xl ml-12">Sticker</p>
+
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <div class="grid grid-flow-row-dense grid-cols-12">
+            <div class="col-span-6"></div>
+            <div class="col-span-6">
+                <div class="mb-3 flex justify-center">
+                    <button class="button-amount" (click)="decrease()">-</button>
+                    <input type="text" class="input-amount" pInputText disabled [value]="amount">
+                    <button class="button-amount" (click)="increase()">+</button>
+                </div>
+                <button class="button-cart" (click)="addToCart()">เพิ่มเข้าตะกร้า</button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>

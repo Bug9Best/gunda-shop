@@ -1,15 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { getDocs, Firestore, collection } from '@angular/fire/firestore';
 
+
 @Component({
   selector: 'app-high-grade',
   templateUrl: './high-grade.component.html',
   styleUrls: ['./high-grade.component.scss']
 })
 export class HighGradeComponent implements OnInit {
-  public highGradeList: any = [];
 
-  constructor(public firestore: Firestore) {
+  highGradeList: any = [];
+  productDetail: any = [];
+  showDialog: boolean = false;
+  images: any[] = [];
+  amount: number = 1;
+
+  constructor(
+    public firestore: Firestore,
+  ) {
     this.getData();
   }
 
@@ -23,5 +31,33 @@ export class HighGradeComponent implements OnInit {
         return { ...item.data(), id: item.id }
       })]
     })
+  }
+
+  showDetail(id: any) {
+    this.showDialog = true;
+    this.highGradeList.forEach((item: any) => {
+      if (item.id === id) {
+        this.productDetail = item;
+        this.images = [
+          { "src": this.productDetail.productURL, },
+          { "src": this.productDetail.boxURL, }
+        ];
+      }
+    })
+  }
+
+  addToCart() {
+    console.log('add to cart');
+  }
+
+  decrease() {
+    this.amount--;
+    if (this.amount <= 0) {
+      this.amount = 1;
+    }
+  }
+
+  increase() {
+    this.amount++;
   }
 }
