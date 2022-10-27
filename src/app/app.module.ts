@@ -16,7 +16,7 @@ import { HighGradeComponent } from './view/category/high-grade/high-grade.compon
 import { RealGradeComponent } from './view/category/real-grade/real-grade.component';
 import { MasterGradeComponent } from './view/category/master-grade/master-grade.component';
 import { PerfectGradeComponent } from './view/category/perfect-grade/perfect-grade.component';
-import { ToolComponent } from './view/category/tool/tool.component';
+import { ToolComponent } from '../app/view/category/tool/tool.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { ModalComponent } from './component/modal/modal.component';
 import { SearchComponent } from './view/search/search.component';
@@ -29,8 +29,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
 
 @NgModule({
   declarations: [
@@ -55,6 +53,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ToastModule,
     BrowserModule,
     FormsModule,
+    PrimeNGModule,
     ReactiveFormsModule,
     AppRoutingModule,
     MatFormFieldModule,
