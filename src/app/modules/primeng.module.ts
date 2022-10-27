@@ -46,9 +46,9 @@ import { ScrollTopModule } from 'primeng/scrolltop';
 import { TimelineModule } from 'primeng/timeline';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { FileUploadModule } from 'primeng/fileupload';
-
-
-
+import {GalleriaModule} from 'primeng/galleria';
+import {CarouselModule} from 'primeng/carousel';
+import {ImageModule} from 'primeng/image';
 
 let modules = [
   ButtonModule,
@@ -95,7 +95,10 @@ let modules = [
   ScrollTopModule,
   TimelineModule,
   ColorPickerModule,
-  FileUploadModule
+  FileUploadModule,
+  GalleriaModule,
+  CarouselModule,
+  ImageModule
 ]
 
 @NgModule({
