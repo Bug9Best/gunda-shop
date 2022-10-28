@@ -34,14 +34,14 @@
         <div class="col-span-5">
             <p-carousel *ngIf="productDetail" [value]="images" [numVisible]="1" [numScroll]="1">
                 <ng-template let-images pTemplate="item" class="flex justify-center items-center overflow-hidden">
-                    <img [src]="images.src" class="object-bottom bg-gray-100 rounded-md">
+                    <img [src]="images.src" class="object-bottom bg-gray-00 rounded-md">
                 </ng-template>
             </p-carousel>
         </div>
         <p-divider layout="vertical"></p-divider>
         <div class="col-span-5">
             <p class="text-3xl font-bold mb-2"> {{ productDetail.name }} </p>
-            <p class="text-2xl font-bold"> {{ productDetail.price }} Bath </p>
+            <p class="text-2xl font-bold"> {{ productDetail.price }} Baht </p>
             <p-divider></p-divider>
             <p class="text-xl font-bold">Serires : {{ productDetail.series }}</p>
             <p class="text-xl font-bold">คุณสมบัติ</p>
