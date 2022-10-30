@@ -27,8 +27,9 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FooterComponent } from './component/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ToolComponent,
     NavbarComponent,
     SearchComponent,
-    ModalComponent
+    ModalComponent,
+    FooterComponent
   ],
   imports: [
     ToastModule,
@@ -64,7 +66,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
 
   providers: [
-    MessageService
+    MessageService,
+    ConfirmationService
   ],
   bootstrap: [AppComponent]
 })

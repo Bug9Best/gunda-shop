@@ -1,40 +1,59 @@
-<div class="mx-auto w-full max-w-screen-lg px-4 sm:px-6 lg:px-8 my-52">
-    <div class="grid grid-cols-1">
-
-        <div id="header" class="text-xl">
-            <h1 class="font-bold">MY ACCOUNT</h1>
-            <p class="left-5 text-sm relative opacity-40">WELCOME BACK, USER!</p>
+<div class="mx-auto w-full max-w-screen-lg px-8  mt-40">
+    <div class="grid grid-cols-1" *ngIf="user$| async as user; else goLogin">
+        <div id="header" class="text-2xl">
+            <h1 class="font-bold text-2xl">บัญชีของฉัน</h1>
+            <p class="mt-2 text-lg text-neutral-500">ยินดีต้อนรับกลับมา {{userData.firstname}} {{userData.lastname}}</p>
         </div>
 
-        <div class="mt-7 flex gap-10">
+        <div class="mt-12 flex gap-8">
             <div class="flex-auto">
-                <h1 class="font-bold mb-3 ">MY ORDERS</h1>
+                <h1 class="font-bold text-2xl mb-1 ">คำสั่งซื้อของฉัน</h1>
                 <hr>
-
-                <div>
-                    <!--ORDERS HERE-->
-                    <p class="opacity-40 mt-5">YOU HAVEN'T PLACE ANY ORDERS YET</p>
-                </div>
-
+                <p class="mt-2 text-lg text-neutral-500">คุณยังไม่มีคำสั่งซื้อในตอนนี้</p>
             </div>
 
             <div class="flex-auto w-20">
-                <h1 class="font-bold mb-3">PRIMARY ADDRESS</h1>
+                <h1 class="font-bold text-2xl mb-1">ที่อยู่ของฉัน</h1>
                 <hr>
-                <div>
-                    <!--INFORMATION HERE-->
-                    <p class="opacity-40 mt-5">FIRSTNAME LASTNAME</p>
-                    <p class="opacity-40 mt-3">THAILAND</p>
+                <div class="h-[150px]">
+                    <form [formGroup]="addressForm" (ngSubmit)="submitEdit($event)">
+                        <textarea *ngIf="!readOnly; else editForm" formControlName="address" id="address"
+                            class="text-lg text-neutral-500 rounded outline outline-1 outline-neutral-400 p-2" cols="41"
+                            rows="5" [readonly]="readOnly" [value]="userData.address" autofocus></textarea>
+                    </form>
+                    <ng-template #editForm>
+                        <p class="p-2 text-lg text-neutral-500 outline-1 outline-neutral-400 outline-0 pb-20">{{
+                            userData.address }}</p>
+                    </ng-template>
                 </div>
-                <button class="mt-5 p-2 w-[9em] rounded-none text-white bg-black drop-shadow-2xl hover:bg-slate-900">EDIT ADDRESS</button>
-            </div>
 
+                <div class="w-full flex">
+                    <label *ngIf="readOnly; else edit"
+                        class="mt-3 py-3 min-w-full rounded text-white bg-neutral-800 border border-neutral-800 text-center cursor-pointer side"
+                        for="address" (click)="editAddress()">แก้ไขที่อยู่</label>
+                    <ng-template #edit>
+                        <p-confirmPopup styleClass="dark-button"></p-confirmPopup>
+                        <button class="mt-3 bg-neutral-none w-[50%] border border-neutral-800 mr-4 py-3 rounded"
+                            (click)="cancleEdit()">ยกเลิก</button>
+                        <button class="mt-3 bg-neutral-800 00 w-[50%] py-3 rounded text-white"
+                            (click)="submitEdit($event)">ยืนยัน</button>
+                    </ng-template>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
+<ng-template #goLogin>
+    <div class="goLogin w-[50%] mt-60">
+        <p class="mt-40 text-2xl">เพื่อที่จะเข้าถึงฟีเจอร์ account</p>
+        <p class="text-2xl">คุณต้องทำการล็อคอินก่อน</p>
+        <button class="mt-5 py-3 min-w-full rounded text-lg text-white bg-neutral-800 border border-neutral-800 text-center side" routerLink="../login">ไปหน้าล็อคอิน</button>
+    </div>
+</ng-template>
+
 <footer>
-    <div class="absolute pt-40 bottom-0 w-full xs:item-baseline sm:px-5 bg-black">
-        1
+    <div class="absolute bottom-0 w-full pt-10 md:pt-20 bg-black text-neutral-300 ">
+        <p class="mx-20 mb-10">@GUNDA SHOP</p>
     </div>
 </footer>
