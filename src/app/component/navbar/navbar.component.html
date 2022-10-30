@@ -28,7 +28,7 @@
                     </button>
 
                     <div class=" flex items-center ml-3 p-1" *ngIf="user$ | async as user; else login">
-                        <button type="button" class="avatar-active" routerLink="/account">
+                        <button type="button" class="avatar-active" routerLink="/account" (click)="authenService.signout()">
                             <img class="h-8 w-8 rounded-full" *ngIf="userData.photoURL; else noPhoto"
                                 [src]="userData.photoURL">
                             <ng-template #noPhoto>

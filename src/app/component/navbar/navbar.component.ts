@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/service/user/user.service';
-import { AuthenService } from 'src/app/service/authen/authen.service';
-import { getDocs, Firestore, collection } from '@angular/fire/firestore';
 import { User } from 'src/app/model/user';
-import { first } from 'rxjs';
-
-
+import { AuthenService } from 'src/app/service/authen/authen.service';
 
 @Component({
   selector: 'navbar',
@@ -21,12 +17,12 @@ export class NavbarComponent implements OnInit {
     lastname: '',
     email: '',
     photoURL: '',
+    address: '',
   };
 
   constructor(
     public usersService: UserService,
     public authenService: AuthenService,
-    public firestore: Firestore
   ) { }
 
   ngOnInit(): void {
@@ -36,6 +32,7 @@ export class NavbarComponent implements OnInit {
       this.userData.lastname = user?.lastname;
       this.userData.email = user?.email;
       this.userData.photoURL = user?.photoURL;
+      this.userData.address = user?.address;
     });
   }
 }
