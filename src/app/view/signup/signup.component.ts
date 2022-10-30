@@ -33,7 +33,7 @@ export function passwordsMatchValidator(): ValidatorFn {
 
 })
 export class SignupComponent implements OnInit {
-  showValid= true;
+  showValid = true;
 
   userForm = new FormGroup({
     firstname: new FormControl('', [Validators.required]),
@@ -73,7 +73,7 @@ export class SignupComponent implements OnInit {
       .signUp(email, password)
       .pipe(
         switchMap(({ user: { uid } }) =>
-          this.userService.addUser({ uid, email, firstname: firstname, lastname: lastname, photoURL: '' }),
+          this.userService.addUser({ uid, email, firstname: firstname, lastname: lastname, photoURL: '', address: '' }),
         )
       )
       .subscribe(() => {
