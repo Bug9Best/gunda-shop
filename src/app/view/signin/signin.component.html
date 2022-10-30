@@ -1,0 +1,38 @@
+<div class="flex items-center justify-center my-auto px-4" style="height: calc(100vh - 64px);">
+    <div class="w-full max-w-xl">
+        <div>
+            <!-- TODO เปลี่ยนลิงค์รูปภาพ -->
+            <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600">
+            <label class="mt-8 flex justify-center text-3xl font-bold text-gray-900">เข้าสู่ระบบด้วยบัญชีของคุณ</label>
+        </div>
+
+        <form class="mt-16 space-y-6" [formGroup]="loginForm" (ngSubmit)="login()">
+            <div class="rounded-md shadow-sm">
+                <input type="email" class="input" placeholder="อีเมล (Example@gmail.com)" formControlName="email" required>
+                <span *ngIf="!loginForm.get('email')?.valid" class="invalid-input" [hidden]="showValid">กรอกอีเมลให้ครบถ้วน</span>
+            </div>
+
+            <div class="rounded-md shadow-sm">
+                <input type="password" class="input" placeholder="รหัสผ่าน (อย่างน้อย 8 ตัวอักษร)" formControlName="password" required>
+                <span *ngIf="!loginForm.get('password')?.valid" class="invalid-input" [hidden]="showValid">กรอกรหัสให้ครบถ้วน</span>
+            </div>
+
+            <div class="flex items-center justify-between">
+                <!-- Optional ถ้ามีเวลาทำให้จำ username กับ password ใน local storage-->
+                <div class="flex items-center">
+                    <input id="remember-me" name="remember-me" type="checkbox"
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="remember-me" class="ml-2 block text-sm text-gray-900">จำรหัสผ่าน</label>
+                </div>
+
+                <!-- Optional ถ้ามีเวลาทำให้ check password ใน database-->
+                <label class="text-sm font-medium cursor-pointer text-red-600 hover:text-red-500">ลืมรหัสผ่าน?</label>
+            </div>
+
+            <button type="submit" class="button-primary">เข้าสู่ระบบ</button>
+        </form>
+        <label class="flex justify-center text-md text-gray-900 mt-3">หากคุณยังไม่มีบัญชีผู้ใช้
+            <a routerLink="../register" class="ml-3 text-md text-green-600">ลงทะเบียนที่นี่</a>
+        </label>
+    </div>
+</div>

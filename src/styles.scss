@@ -1,4 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+html, body { height: 100%; }
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+body::-webkit-scrollbar { 
+    display: none;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,10 +19,14 @@
 @layer components {
 
     .item-navbar{
-        //  Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" 
-        @apply px-3 py-2 rounded-md text-sm font-medium
-        text-gray-300
-        hover:bg-gray-700 hover:text-white;
+        @apply px-3 py-2 rounded-md text-base font-bold
+        text-neutral-100
+        hover:bg-neutral-700 hover:text-white;
+    }
+    .item-navbar-active{
+        @apply px-3 py-2 rounded-md text-base font-bold
+        bg-neutral-700 text-white  
+        hover:bg-neutral-700 hover:text-white;
     }
 
     .input {
@@ -20,35 +36,67 @@
 
     .button-primary {
         @apply flex w-full justify-center rounded-md border border-transparent py-2 px-4 
-        bg-green-600 text-lg text-white 
-        hover:bg-green-700 
-        focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2;
+        bg-neutral-700 text-lg text-white 
+        hover:bg-neutral-800 
+        focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2;
     }
 
     .button-secondary {
         @apply flex w-full justify-center rounded-md border border-transparent py-2 px-4 
-        bg-inherit text-lg text-green-600 border-green-600
-        hover:bg-inherit  hover:text-green-700 hover:border-green-700
-        focus:outline-none focus:ring-2 focus:ring-green-700 focus:ring-offset-2;
+        bg-inherit text-lg text-neutral-700 border-neutral-700
+        hover:bg-inherit  hover:text-neutral-800 hover:border-neutral-800
+        focus:outline-none focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2;
     }
 
     .button-tertiary  {
         @apply flex w-full justify-center rounded-md border border-transparent py-2 px-4 
-        bg-inherit text-lg text-green-600
-        hover:bg-inherit  hover:text-green-700
+        bg-inherit text-lg text-neutral-700
+        hover:bg-inherit  hover:text-neutral-800
     }
 
     .category-title {
         @apply flex justify-center text-3xl font-bold tracking-tight 
-        text-gray-900;
+        text-neutral-900;
     }
 
     .category-subtitle {
         @apply text-xl w-7/12 text-center tracking-tight 
-        text-gray-400;
+        text-neutral-400;
     }
 
     .category-item {
-        @apply rounded-lg border border-indigo-200 group-hover:opacity-90 group-hover:border-indigo-700;
+        @apply rounded-lg border border-neutral-300 group-hover:opacity-90 group-hover:border-neutral-800
+        shadow-[inset_00_-15px_50px_1px_rgba(0,0,0,0.15)];
+    }
+
+    .invalid-input{
+        @apply text-red-500 text-sm ml-2;
+    }
+
+    .avatar {
+        @apply flex items-center justify-center
+        text-white font-bold text-base h-8 w-8 rounded-full bg-gray-600 p-3;
+    }
+    
+    .avatar-active {
+        @apply rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800;
+    }
+
+    .button-cart {
+        @apply rounded-md border border-transparent py-2 px-20 min-w-full
+        bg-neutral-700 text-base text-white 
+        hover:bg-neutral-800 
+        focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2;
+    }
+
+    .button-amount{
+        @apply
+        px-8 py-2 rounded-md bg-neutral-700 text-2xl text-white font-bold;
+    }
+
+    .input-amount{
+        @apply
+        text-center w-16 text-2xl placeholder-black border-black mr-2;
     }
 }
+
