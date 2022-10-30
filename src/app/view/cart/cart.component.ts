@@ -8,8 +8,9 @@ import { getDocs, Firestore, collection } from '@angular/fire/firestore';
 })
 export class CartComponent implements OnInit {
 
-  constructor(public firestore: Firestore) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 }
+
