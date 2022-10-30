@@ -1,5 +1,5 @@
 .box {
-    height: 76vh;
+    height: 80vh;
 }
 
 .center {
@@ -11,5 +11,15 @@
 
 .reccommend-item {
     width: 100%;
-    height: 100%;
+    height: 40em;
+    transition: all 0.5s;
+}
+
+.delay {
+    transition: all 0.5s;
+}
+
+.delay:hover {
+    transition: all 0.6s;
+    transform: scale(1.05);
 }
