@@ -1,5 +1,5 @@
 .side {
-    transition: all .5s ease-in;
+    transition: all .45s ease-in;
     position: relative;
     z-index: 1;
 
@@ -18,7 +18,7 @@
         width: 0%;
         height: 100%;
         background-color: white;
-        transition: all .5s ease-in;
+        transition: all .45s ease-in;
         z-index: -1;
     }
 

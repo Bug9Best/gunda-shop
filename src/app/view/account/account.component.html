@@ -19,7 +19,7 @@
                     <form [formGroup]="addressForm" (ngSubmit)="submitEdit($event)">
                         <textarea *ngIf="!readOnly; else editForm" formControlName="address" id="address"
                             class="text-lg text-neutral-500 rounded outline outline-1 outline-neutral-400 p-2" cols="41"
-                            rows="5" [readonly]="readOnly" [value]="userData.address" autofocus></textarea>
+                            rows="5" [readonly]="readOnly" [value]="userData.address" autofocus="true"></textarea>
                     </form>
                     <ng-template #editForm>
                         <p class="p-2 text-lg text-neutral-500 outline-1 outline-neutral-400 outline-0 pb-20">{{

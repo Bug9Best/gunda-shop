@@ -10,10 +10,10 @@ import { updateDoc, doc, Firestore } from '@angular/fire/firestore';
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss']
 })
+
 export class AccountComponent implements OnInit {
   user$ = this.userService.getCurrentUser();
   readOnly = true;
-  autoFocus = false;
 
   userData: User = {
     uid: '',
@@ -60,7 +60,6 @@ export class AccountComponent implements OnInit {
 
   cancleEdit() {
     this.readOnly = true;
-    this.autoFocus = false;
   }
 
   submitEdit(event: Event) {
@@ -68,7 +67,6 @@ export class AccountComponent implements OnInit {
 
     if (!this.user$) return; { }
     const firebase = doc(this.firestore, 'users', this.userData.uid);
-
 
     this.confirmationService.confirm({
       target: event.target as EventTarget,
@@ -78,7 +76,6 @@ export class AccountComponent implements OnInit {
       rejectButtonStyleClass: 'text-neutral-900 border-0 focus:outline-none focus:ring-0 hoverButton ui-button-success',
       accept: () => {
         this.readOnly = true;
-        this.autoFocus = false;
         updateDoc(firebase, { address: addressForm.address }).then(() => {
           this.getUser();
           this.messageService.add({ severity: 'success', summary: 'บันทึกข้อมูลสำเร็จ', detail: 'บันทึกข้อมูลสำเร็จ' });
