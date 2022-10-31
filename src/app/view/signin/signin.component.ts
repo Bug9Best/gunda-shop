@@ -5,9 +5,6 @@ import { Auth, } from '@angular/fire/auth';
 import { FormGroup, FormControl, Validators, } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 
-
-
-
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
