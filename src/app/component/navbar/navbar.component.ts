@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/service/user/user.service';
 import { User } from 'src/app/model/user';
 import { AuthenService } from 'src/app/service/authen/authen.service';
+import { MenuModule } from 'primeng/menu';
+import { MenuItem } from 'primeng/api';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'navbar',
@@ -10,6 +14,10 @@ import { AuthenService } from 'src/app/service/authen/authen.service';
 })
 export class NavbarComponent implements OnInit {
   user$ = this.usersService.getCurrentUser();
+  items = [
+    { label: 'บัญชีของฉัน', icon: 'pi pi-fw pi-user', command: () => { this.goAccount(); } },
+    { label: 'ออกจากระบบ', icon: 'pi pi-fw pi-sign-out', command: () => { this.signOut(); } },
+  ];
 
   userData: User = {
     uid: '',
@@ -23,6 +31,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     public usersService: UserService,
     public authenService: AuthenService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -34,5 +43,13 @@ export class NavbarComponent implements OnInit {
       this.userData.photoURL = user?.photoURL;
       this.userData.address = user?.address;
     });
+  }
+
+  goAccount() {
+    this.router.navigate(['/account']);
+  }
+
+  signOut() {
+    this.authenService.signout();
   }
 }
