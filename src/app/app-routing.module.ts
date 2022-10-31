@@ -13,6 +13,11 @@ import { PerfectGradeComponent } from './view/category/perfect-grade/perfect-gra
 import { ToolComponent } from './view/category/tool/tool.component';
 import { SearchComponent } from './view/search/search.component';
 
+//import auth guard
+import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
+const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 
 const routes: Routes = [
   {
@@ -33,7 +38,8 @@ const routes: Routes = [
   },
   {
     path: "login",
-    component: SigninComponent
+    component: SigninComponent,
+    ...canActivate(redirectLoggedInToHome),
   },
   {
     path: "register",
