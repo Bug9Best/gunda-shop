@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { UserService } from 'src/app/service/user/user.service';
 import { User } from 'src/app/model/user';
 import { AuthenService } from 'src/app/service/authen/authen.service';
 import { MenuModule } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
+import { getDocs, Firestore, collection } from '@angular/fire/firestore';
+import { BadgeModule } from 'primeng/badge';
 
 
 @Component({
@@ -14,6 +16,12 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   user$ = this.usersService.getCurrentUser();
+
+  cartList: any = [];
+  badgeNumber: string = '0';
+
+  value = '';
+
   items = [
     { label: 'บัญชีของฉัน', icon: 'pi pi-fw pi-user', command: () => { this.goAccount(); } },
     { label: 'ออกจากระบบ', icon: 'pi pi-fw pi-sign-out', command: () => { this.signOut(); } },
@@ -32,7 +40,10 @@ export class NavbarComponent implements OnInit {
     public usersService: UserService,
     public authenService: AuthenService,
     private router: Router,
-  ) { }
+    private firestore: Firestore,
+  ) {
+    this.updateBadge();
+  }
 
   ngOnInit(): void {
     this.user$.subscribe((user) => {
@@ -51,5 +62,18 @@ export class NavbarComponent implements OnInit {
 
   signOut() {
     this.authenService.signout();
+  }
+
+  updateBadge() {
+    if (this.user$.subscribe((user) => {
+      if (user) {
+
+      }
+      else {
+        console.log(this.badgeNumber);
+        this.badgeNumber = Object.keys(localStorage).length.toString();
+      }
+    }))
+      return;
   }
 }

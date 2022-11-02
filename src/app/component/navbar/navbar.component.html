@@ -1,10 +1,10 @@
 <nav class="bg-neutral-900">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="flex h-16 items-center justify-between">
+    <div class="mx-auto max-w-7xl px- sm:px-6 lg:px-8">
+        <div class="flex h-20 items-center justify-between">
             <div class="flex items-center">
                 <a href="home">
                     <!-- TODO Change Logo -->
-                    <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500">
+                    <img class="h-32 w-32" src="https://cdn.discordapp.com/attachments/1021435603688099913/1036658980145090570/13_20221031221202.png">
                 </a>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-center space-x-5">
@@ -23,8 +23,9 @@
             </div>
             <div class="hidden md:block">
                 <div class="ml-4 flex items-center md:ml-6">
-                    <button type="button" class="text-gray-400 hover:text-white" routerLink="/cart">
-                        <i class="pi pi-shopping-cart p-2" style="font-size: 1.25rem"></i>
+                    <button type="button" class="text-gray-400 hover:text-white mr-5" routerLink="/cart">
+                        <i class="pi pi-shopping-cart p-2" style="font-size: 1.25rem" pBadge style="font-size: 1.25rem"
+                            severity="success" [value]="badgeNumber"></i>
                     </button>
 
                     <div class=" flex items-center ml-3 p-1" *ngIf="user$ | async as user; else login">
@@ -41,7 +42,7 @@
                     </div>
 
                     <ng-template #login>
-                        <button type="button" class="p-1 px-4 ml-2  rounded-md text-white bg-neutral-600 "
+                        <button type="button" class="px-8 py-2 ml-2  rounded-md text-white bg-neutral-600 "
                             routerLink="/login">Sign In</button>
                     </ng-template>
                 </div>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { getDocs, Firestore, collection } from '@angular/fire/firestore';
-
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { getDocs, setDoc, doc, Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { NavbarComponent } from 'src/app/component/navbar/navbar.component';
+import { UserService } from 'src/app/service/user/user.service';
 
 @Component({
   selector: 'app-high-grade',
@@ -8,6 +9,8 @@ import { getDocs, Firestore, collection } from '@angular/fire/firestore';
   styleUrls: ['./high-grade.component.scss']
 })
 export class HighGradeComponent implements OnInit {
+  @ViewChild(NavbarComponent) navbarComponent?: NavbarComponent;
+  user$ = this.userService.getCurrentUser();
 
   highGradeList: any = [];
   productDetail: any = [];
@@ -16,7 +19,8 @@ export class HighGradeComponent implements OnInit {
   amount: number = 1;
 
   constructor(
-    public firestore: Firestore,
+    private firestore: Firestore,
+    private userService: UserService,
   ) {
     this.getData();
   }
@@ -39,15 +43,30 @@ export class HighGradeComponent implements OnInit {
       if (item.id === id) {
         this.productDetail = item;
         this.images = [
-          { "src": this.productDetail.productURL, },
-          { "src": this.productDetail.boxURL, }
+          { "src": this.productDetail.productURL },
+          { "src": this.productDetail.productBG },
+          { "src": this.productDetail.boxURL}
         ];
       }
     })
   }
 
   addToCart() {
-    console.log('add to cart');
+    if (this.user$.subscribe((user) => {
+      if (user) {
+        const ref = collection(this.firestore, 'users', user.uid, 'carts');
+        addDoc(ref, {
+          product: this.productDetail,
+          amount: this.amount,
+        })
+      }
+      else {
+        localStorage.setItem(this.productDetail.id, JSON.stringify(this.productDetail));
+        this.navbarComponent?.updateBadge();
+        window.location.reload();
+      }
+    }))
+      this.showDialog = false;
   }
 
   decrease() {
