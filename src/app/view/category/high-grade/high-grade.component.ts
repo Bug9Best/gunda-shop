@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { getDocs, setDoc, doc, Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { getDocs, Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { MessageService } from 'primeng/api';
 import { NavbarComponent } from 'src/app/component/navbar/navbar.component';
 import { UserService } from 'src/app/service/user/user.service';
 
@@ -21,6 +22,7 @@ export class HighGradeComponent implements OnInit {
   constructor(
     private firestore: Firestore,
     private userService: UserService,
+    private messageService: MessageService,
   ) {
     this.getData();
   }
@@ -45,7 +47,7 @@ export class HighGradeComponent implements OnInit {
         this.images = [
           { "src": this.productDetail.productURL },
           { "src": this.productDetail.productBG },
-          { "src": this.productDetail.boxURL}
+          { "src": this.productDetail.boxURL }
         ];
       }
     })
@@ -58,12 +60,19 @@ export class HighGradeComponent implements OnInit {
         addDoc(ref, {
           product: this.productDetail,
           amount: this.amount,
+        }).then(() => {
+          this.messageService.add({ 
+            severity: 'success', 
+            summary: 'สำเร็จ!', 
+            detail: 'เพิ่มสินค้าไปยังตะกร้าเรียบร้อย' });
         })
       }
       else {
-        localStorage.setItem(this.productDetail.id, JSON.stringify(this.productDetail));
-        this.navbarComponent?.updateBadge();
-        window.location.reload();
+        this.messageService.add({
+          severity: 'error',
+          summary: 'เกิดข้อผิดพลาด',
+          detail: 'ทำการล็อคอินก่อนเพื่อเพิ่มสินค้าเข้าตะกร้า'
+        });
       }
     }))
       this.showDialog = false;
