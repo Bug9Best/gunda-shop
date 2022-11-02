@@ -19,6 +19,7 @@ export class NavbarComponent implements OnInit {
 
   cartList: any = [];
   badgeNumber: string = '0';
+  badgeNumberData = 0;
 
   value = '';
 
@@ -42,7 +43,6 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private firestore: Firestore,
   ) {
-    this.updateBadge();
   }
 
   ngOnInit(): void {
@@ -62,18 +62,5 @@ export class NavbarComponent implements OnInit {
 
   signOut() {
     this.authenService.signout();
-  }
-
-  updateBadge() {
-    if (this.user$.subscribe((user) => {
-      if (user) {
-
-      }
-      else {
-        console.log(this.badgeNumber);
-        this.badgeNumber = Object.keys(localStorage).length.toString();
-      }
-    }))
-      return;
   }
 }
