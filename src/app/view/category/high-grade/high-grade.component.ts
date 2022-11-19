@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { getDocs, Firestore, collection, addDoc } from '@angular/fire/firestore';
 import { MessageService } from 'primeng/api';
-import { NavbarComponent } from 'src/app/component/navbar/navbar.component';
 import { UserService } from 'src/app/service/user/user.service';
 
 @Component({
@@ -10,9 +9,7 @@ import { UserService } from 'src/app/service/user/user.service';
   styleUrls: ['./high-grade.component.scss']
 })
 export class HighGradeComponent implements OnInit {
-  @ViewChild(NavbarComponent) navbarComponent?: NavbarComponent;
   user$ = this.userService.getCurrentUser();
-
   highGradeList: any = [];
   productDetail: any = [];
   showDialog: boolean = false;

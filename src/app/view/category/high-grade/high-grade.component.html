@@ -13,16 +13,14 @@
 <main>
     <div class="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-
             <div *ngFor="let highGrade of highGradeList" class="group relative" (click)="showDetail(highGrade.id)">
                 <div class="min-h-80 w-full aspect-w-1 aspect-h-1 lg:aspect-none lg:h-80 overflow-hidden category-item">
                     <img [src]="highGrade.productURL"
                         class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                 </div>
-                <div class="mt-4 flex justify-between px-3">
-                    <p class="text-lg text-gray-700"><a href="#">{{ highGrade.name }}</a></p>
-                    <p class="text-lg font-bold text-gray-900">{{ highGrade.price | currency:'THB':'symbol-narrow':'' }}
-                    </p>
+                <div class="mt-4 flex flex-col">
+                    <p class="text-lg text-gray-700">{{ highGrade.name }}</p>
+                    <p class="text-lg font-bold text-gray-900">{{ highGrade.price | currency:'THB':'symbol-narrow':'' }}</p>
                 </div>
             </div>
         </div>
@@ -32,7 +30,7 @@
 <p-dialog [(visible)]="showDialog" [resizable]="false" [modal]="true" [draggable]="false" [style]="{width: '75vw'}">
     <div class="grid grid-flow-row-dense grid-cols-12">
         <div class="col-span-5">
-            <p-carousel *ngIf="productDetail" [value]="images" [numVisible]="1" [numScroll]="1">
+            <p-carousel *ngIf="productDetail" [value]="images" [autoplayInterval]="3000">
                 <ng-template let-images pTemplate="item" class="flex justify-center items-center overflow-hidden">
                     <img [src]="images.src" class="object-bottom bg-gray-00 rounded-md">
                 </ng-template>
