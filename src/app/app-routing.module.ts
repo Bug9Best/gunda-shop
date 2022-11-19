@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { IntroComponent } from './view/intro/intro.component';
 import { HomeComponent } from './view/home/home.component';
 import { AccountComponent } from './view/account/account.component';
 import { CartComponent } from './view/cart/cart.component';
@@ -20,10 +19,7 @@ const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 
 const routes: Routes = [
-  {
-    path: "intro",
-    component: IntroComponent
-  },
+
   {
     path: "home",
     component: HomeComponent
@@ -71,7 +67,7 @@ const routes: Routes = [
   },
   {
     path: "",
-    redirectTo: "intro",
+    redirectTo: "home",
     pathMatch: "full"
   },
 ];

@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PrimeNGModule } from './modules/primeng.module';
 
-import { IntroComponent } from './view/intro/intro.component';
 import { HomeComponent } from './view/home/home.component';
 import { AccountComponent } from './view/account/account.component';
 import { CartComponent } from './view/cart/cart.component';
@@ -24,7 +23,6 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -35,7 +33,6 @@ import { FooterComponent } from './component/footer/footer.component';
   declarations: [
     AppComponent,
 
-    IntroComponent,
     HomeComponent,
     AccountComponent,
     CartComponent,
@@ -58,7 +55,6 @@ import { FooterComponent } from './component/footer/footer.component';
     PrimeNGModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    MatFormFieldModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
