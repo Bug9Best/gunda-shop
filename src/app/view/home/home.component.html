@@ -1,63 +1,66 @@
-<div class="box bg-neutral-800 relative">
-    <!-- <img [src]="imgList[2].src" class="absolute right-0 top-0 hidden md:block "> -->
-    <p class="text-6xl text-white center">Gunda Shop</p>
-    <!-- <img [src]="imgList[4].src" class="scale-115 absolute -left-64 bottom-0 hidden md:block "> -->
+<div class="box">
+    <p class="text-white font-custom font-extrabold">Gunda Shop 
+        <i class="pi pi-angle-down mt-0" style="font-size: 5rem"></i>
+    </p>
+
+    <p-carousel [value]="landing" [autoplayInterval]="6000" [showNavigators]="false" [showIndicators]="false">
+        <ng-template let-data pTemplate="item">
+            <div class="overflow-hidden	img-container">
+                <img [src]="data.image" class="object-cover object-top img-landing opacity-90" />
+            </div>
+        </ng-template>
+    </p-carousel>
 </div>
 
-<p class="text-5xl text-center mt-16">Reccommend Products</p>
-<div class="flex justify-center">
-    <div class="grid grid-cols-2 gap-4 p-20 container">
-        <div
-            class="bg-neutral-200 hover:bg-neutral-500 rounded-xl shadow reccommend-item flex justify-center overflow-hidden">
-            <img class="object-cover"
-                src="https://cdn.discordapp.com/attachments/1029261631118651444/1034051550680723456/61niRZgYiNL-removebg-preview.png">
+<p class="text-5xl text-center font-bold pt-12">สินค้าของเรา</p>
+<div class="grid grid-cols-3 w-full pt-12">
+    <div class="flex flex-col">
+        <div class="overflow-hidden flex justify-center" style="height: 400px;">
+            <img class="delay" [src]="highGradeURL[randomNum]">
         </div>
-        <div
-            class="bg-neutral-200 hover:bg-neutral-500 rounded-xl shadow reccommend-item flex justify-center overflow-hidden">
-            <img class="object-cover"
-                src="https://cdn.discordapp.com/attachments/1029261631118651444/1034050934940123187/s-l400-removebg-preview.png">
-        </div>
-        <div>
-            <p class="text-center text-xl">Name1</p>
-            <p class="text-center text-xl">Price1</p>
-        </div>
-        <div>
-            <p class="text-center text-lg">Name2</p>
-            <p class="text-center text-lg">Price2</p>
-        </div>
+        <p class="text-center font-bold">{{ highGradeName[randomNum] }}</p>
+        <button type="button" label="ดูสินค้า High-Grade เพิ่มเติม" class="p-button-text p-button-success"
+            routerLink="../category/high-grade" pButton pRipple>
+        </button>
+    </div>
 
+    <div class="flex flex-col">
+        <div class="overflow-hidden flex justify-center" style="height: 400px;">
+            <img class="delay" [src]="realGradeURL[randomNum]">
+        </div>
+        <p class="text-center font-bold">{{ realGradeName[randomNum] }}</p>
+        <button type="button" label="ดูสินค้า Real-Grade เพิ่มเติม" class="p-button-text p-button-success"
+            routerLink="../category/real-grade" pButton pRipple>
+        </button>
+    </div>
+
+    <div class="flex flex-col">
+        <div class="overflow-hidden flex justify-center" style="height: 400px;">
+            <img class="delay" [src]="masterGradeURL[randomNum]">
+        </div>
+        <p class="text-center font-bold">{{ masterGradeName[randomNum] }}</p>
+        <button type="button" label="ดูสินค้า Master-Grade เพิ่มเติม" class="p-button-text p-button-success"
+            routerLink="../category/master-grade" pButton pRipple>
+        </button>
+    </div>
+
+    <div class="flex flex-col">
+        <div class="overflow-hidden flex justify-center" style="height: 400px;">
+            <img class="delay" [src]="perfectGradeURL[randomNum]">
+        </div>
+        <p class="text-center font-bold">{{ perfectGradeName[randomNum] }}</p>
+        <button type="button" label="ดูสินค้า Perfect-Grade เพิ่มเติม" class="p-button-text p-button-success"
+            routerLink="../category/perfect-grade" pButton pRipple>
+        </button>
+    </div>
+
+    <div class="flex flex-col">
+        <div class="overflow-hidden flex justify-center items-center" style="height: 400px;">
+            <img class="delay object-scale-down h-72 w-96" [src]="toolURL[randomNum]" height="200px">
+        </div>
+        <p class="text-center font-bold">{{ toolName[randomNum] }}</p>
+        <button type="button" label="ดูสินค้า Tool เพิ่มเติม" class="p-button-text p-button-success"
+            routerLink="../category/high-grade" pButton pRipple>
+        </button>
     </div>
 </div>
-
-<div class="flex justify-center mb-5 p-1">
-    <div class="grid grid-cols-4 w-full h-96">
-        <div class="bg-neutral-500 overflow-hidden flex justify-center relative border border-neutral-50">
-            <img class="object-cover object-center delay" [src]="highGradeList[randomNum]" >
-            <span class="absolute bottom-0 left-0 m-3">
-                <button class="bg-white px-4 py-2 w-60 rounded" routerLink="../category/high-grade">ดูสินค้า (High-Grade)</button>
-            </span>
-        </div>
-        <div class="bg-neutral-500 overflow-hidden flex justify-center relative border border-neutral-50">
-            <img class="object-cover object-center delay" [src]="realGradeList[randomNum]" >
-            <span class="absolute bottom-0 left-0 m-3">
-                <button class="bg-white px-4 py-2 w-60 rounded" routerLink="../category/real-grade">ดูสินค้า (Real-Grade)</button>
-            </span>
-         </div>
-        <div class="bg-neutral-500 overflow-hidden flex justify-center relative border border-neutral-50">
-            <img class="object-cover object-center delay" [src]="masterGradeList[randomNum]" >
-            <span class="absolute bottom-0 left-0 m-3">
-                <button class="bg-white px-4 py-2 w-60 rounded" routerLink="../category/master-grade">ดูสินค้า (Master-Grade)</button>
-            </span>  
-        </div>
-        <div class="bg-neutral-500 overflow-hidden flex justify-center relative border border-neutral-50">
-            <img class="object-cover object-center delay" [src]="perfectGradeList[randomNum]" >
-            <span class="absolute bottom-0 left-0 m-3">
-                <button class="bg-white px-4 py-2 w-60 rounded" routerLink="../category/perfect-grade">ดูสินค้า (Perfect-Grade)</button>
-            </span>
-        </div>
-    </div>
-</div>
-
-<footer class="">
-    asd
-</footer>
