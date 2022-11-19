@@ -12,6 +12,9 @@ import {
   ValidatorFn,
   AbstractControl,
 } from '@angular/forms';
+import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
+import { doc } from '@firebase/firestore';
+import { Firestore, setDoc } from '@angular/fire/firestore';
 
 export function passwordsMatchValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -50,6 +53,9 @@ export class SignupComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private messageService: MessageService,
+
+    private auth: Auth,
+    private fireStore: Firestore
   ) { }
 
   ngOnInit(): void {
@@ -57,7 +63,6 @@ export class SignupComponent implements OnInit {
 
   submit() {
     const { firstname, lastname, email, password } = this.userForm.value;
-
     if (!this.userForm.valid || !firstname || !lastname || !password || !email) {
       this.messageService.add({
         severity: 'error',
@@ -68,7 +73,6 @@ export class SignupComponent implements OnInit {
       this.showValid = false;
       return;
     }
-
 
     this.authenService
       .signUp(email, password)

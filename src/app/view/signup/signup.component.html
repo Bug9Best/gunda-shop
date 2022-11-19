@@ -2,7 +2,7 @@
     <div class="w-full max-w-xl">
         <label class="mt-8 flex justify-center text-3xl font-bold text-gray-900">สมัครบัญชีผู้ใช้งาน</label>
 
-        <form [formGroup]="userForm" (ngSubmit)="submit()" class="mt-16 space-y-6">
+        <form [formGroup]="userForm" class="mt-16 space-y-6">
             <div class="rounded-md shadow-sm">
                 <input type="text" formControlName="firstname" class="input" placeholder="ชื่อ" required>
                 <span *ngIf="!userForm.get('firstname')?.valid" class="invalid-input" [hidden]="showValid">กรอกชื่อให้ครบถ้วน</span>
@@ -26,8 +26,7 @@
                 <span *ngIf="!userForm.get('confirmPassword')?.valid" class="invalid-input" [hidden]="showValid">กรอกรหัสผ่านให้ครบถ้วน</span>
                 <span *ngIf="userForm.errors?.['passwordsDontMatch']" class="invalid-input" [hidden]="showValid">รหัสผ่านไม่ตรงกัน</span>
             </div>
-
-            <button type="submit" class="button-primary">ยืนยัน</button>
         </form>
+        <button type="submit" (click)="submit()" class="button-primary mt-5">ยืนยัน</button>
     </div>
 </div>

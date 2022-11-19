@@ -7,7 +7,8 @@ import {
   signInWithEmailAndPassword,
   UserCredential,
   createUserWithEmailAndPassword
-} from '@angular/fire/auth'; import { FormGroup, FormControl, Validators, } from '@angular/forms';
+} from '@angular/fire/auth'; 
+import { FormGroup, FormControl, Validators, } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 
 
@@ -45,7 +46,6 @@ export class SigninComponent implements OnInit {
 
   login() {
     const { email, password } = this.loginForm.value;
-
     if (!this.loginForm.valid || !email || !password) {
       this.messageService.add({
         severity: 'error',
