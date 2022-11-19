@@ -10,7 +10,6 @@ import { RealGradeComponent } from './view/category/real-grade/real-grade.compon
 import { MasterGradeComponent } from './view/category/master-grade/master-grade.component';
 import { PerfectGradeComponent } from './view/category/perfect-grade/perfect-grade.component';
 import { ToolComponent } from './view/category/tool/tool.component';
-import { SearchComponent } from './view/search/search.component';
 
 //import auth guard
 import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
@@ -60,10 +59,6 @@ const routes: Routes = [
   {
     path: "category/tool",
     component: ToolComponent
-  },
-  {
-    path: "search",
-    component: SearchComponent
   },
   {
     path: "",

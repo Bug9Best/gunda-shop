@@ -18,7 +18,6 @@ import { PerfectGradeComponent } from './view/category/perfect-grade/perfect-gra
 import { ToolComponent } from '../app/view/category/tool/tool.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { ModalComponent } from './component/modal/modal.component';
-import { SearchComponent } from './view/search/search.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
@@ -28,6 +27,7 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './component/footer/footer.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,6 @@ import { FooterComponent } from './component/footer/footer.component';
     PerfectGradeComponent,
     ToolComponent,
     NavbarComponent,
-    SearchComponent,
     ModalComponent,
     FooterComponent
   ],
@@ -55,6 +54,7 @@ import { FooterComponent } from './component/footer/footer.component';
     PrimeNGModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    HttpClientModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
@@ -63,7 +63,7 @@ import { FooterComponent } from './component/footer/footer.component';
 
   providers: [
     MessageService,
-    ConfirmationService
+    ConfirmationService,
   ],
   bootstrap: [AppComponent]
 })
