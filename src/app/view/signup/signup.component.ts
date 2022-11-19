@@ -61,13 +61,14 @@ export class SignupComponent implements OnInit {
     if (!this.userForm.valid || !firstname || !lastname || !password || !email) {
       this.messageService.add({
         severity: 'error',
-        summary: 'ข้อมูลไม่ถูกต้อง',
+        summary: 'ข้อมูลไม่ถูกต้อง!',
         detail: 'ตรวจสอบข้อมูลอีกครั้ง',
         life: 3000,
       });
       this.showValid = false;
       return;
     }
+
 
     this.authenService
       .signUp(email, password)
@@ -77,6 +78,12 @@ export class SignupComponent implements OnInit {
         )
       )
       .subscribe(() => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'สำเร็จ!',
+          detail: 'สมัครสมาชิกสำเร็จ',
+          life: 3000,
+        });
         this.router.navigate(['/home']);
       });
   }
