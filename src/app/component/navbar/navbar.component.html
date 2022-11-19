@@ -1,5 +1,5 @@
 <nav class="bg-neutral-900">
-    <div class="mx-auto max-w-7xl py-2 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl py-1 sm:px-6 lg:px-8">
         <div class="flex h-20 items-center justify-between">
             <div class="flex items-center">
                 <a routerLink="home">
@@ -23,21 +23,17 @@
                     <i class="pi pi-shopping-cart p-2" style="font-size: 1.5rem"></i>
                 </button>
 
-                <div class=" flex items-center ml-3 p-1" *ngIf="user$ | async as user; else login">
+                <div class=" flex items-center ml-3 p-1" *ngIf="user | async as user; else login">
                     <button type="button" class="avatar-active" (click)="menu.toggle($event)">
-                        <img class="h-8 w-8 rounded-full" *ngIf="userData.photoURL; else noPhoto"
-                            [src]="userData.photoURL">
-                        <ng-template #noPhoto>
-                            <p class="avatar">
-                                {{ userData.firstname | slice:0:1 }}{{ userData.lastname | slice:0:1}}
-                            </p>
-                        </ng-template>
+                        <p class="avatar">
+                            {{ user.firstname | slice:0:1 }}{{ user.lastname | slice:0:1}}
+                        </p>
                     </button>
                     <p-menu #menu [popup]="true" [model]="items" styleClass="mt-5 -ml-40"></p-menu>
                 </div>
 
                 <ng-template #login>
-                    <button type="button" class="px-8 py-2 ml-2  rounded-md text-white bg-neutral-600 "
+                    <button type="button" class="px-8 py-1 ml-2  rounded-md text-white bg-neutral-600 "
                         routerLink="/login">Sign In</button>
                 </ng-template>
             </div>

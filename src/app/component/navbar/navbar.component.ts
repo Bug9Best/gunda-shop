@@ -5,8 +5,10 @@ import { AuthenService } from 'src/app/service/authen/authen.service';
 import { MenuModule } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
-import { getDocs, Firestore, collection } from '@angular/fire/firestore';
+import { getDocs, Firestore, collection, doc, docData } from '@angular/fire/firestore';
 import { BadgeModule } from 'primeng/badge';
+import { Observable, of, switchMap } from 'rxjs';
+import { Auth, authState } from '@angular/fire/auth';
 
 
 @Component({
@@ -15,7 +17,7 @@ import { BadgeModule } from 'primeng/badge';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  user$ = this.usersService.getCurrentUser();
+  user = this.usersService.getCurrentUser();
 
   cartList: any = [];
   badgeNumber: string = '0';
@@ -28,31 +30,18 @@ export class NavbarComponent implements OnInit {
     { label: 'ออกจากระบบ', icon: 'pi pi-fw pi-sign-out', command: () => { this.signOut(); } },
   ];
 
-  userData: User = {
-    uid: '',
-    firstname: '',
-    lastname: '',
-    email: '',
-    photoURL: '',
-    address: '',
-  };
+
 
   constructor(
     public usersService: UserService,
     public authenService: AuthenService,
     private router: Router,
+
+    private firestore: Firestore,
   ) {
   }
 
   ngOnInit(): void {
-    this.user$.subscribe((user) => {
-      this.userData.uid = user?.uid || '';
-      this.userData.firstname = user?.firstname;
-      this.userData.lastname = user?.lastname;
-      this.userData.email = user?.email;
-      this.userData.photoURL = user?.photoURL;
-      this.userData.address = user?.address;
-    });
   }
 
   goAccount() {
