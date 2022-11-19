@@ -41,7 +41,6 @@ export class NavbarComponent implements OnInit {
     public usersService: UserService,
     public authenService: AuthenService,
     private router: Router,
-    private firestore: Firestore,
   ) {
   }
 
@@ -61,6 +60,8 @@ export class NavbarComponent implements OnInit {
   }
 
   signOut() {
-    this.authenService.signout();
+    this.authenService.signout().subscribe(() => {
+      this.router.navigate(['/login']);
+    });
   }
 }
