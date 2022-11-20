@@ -37,6 +37,7 @@ export class PerfectGradeComponent implements OnInit {
   }
 
   showDetail(id: any) {
+    this.amount = 1;
     this.showDialog = true;
     this.perfectGradeList.forEach((item: any) => {
       if (item.id === id) {
