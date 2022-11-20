@@ -33,7 +33,6 @@ export class RealGradeComponent implements OnInit {
       this.realGradeList = [...response.docs.map((item) => {
         return { ...item.data(), id: item.id }
       })]
-      console.log(this.realGradeList);
     })
   }
   

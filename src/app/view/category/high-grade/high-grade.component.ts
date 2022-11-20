@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { getDocs, Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { getDocs, Firestore, collection, addDoc, updateDoc, doc } from '@angular/fire/firestore';
 import { MessageService } from 'primeng/api';
 import { UserService } from 'src/app/service/user/user.service';
 
@@ -12,6 +12,7 @@ export class HighGradeComponent implements OnInit {
   user$ = this.userService.getCurrentUser();
   highGradeList: any = [];
   productDetail: any = [];
+  cartList: any = [];
   showDialog: boolean = false;
   images: any[] = [];
   amount: number = 1;
@@ -22,6 +23,7 @@ export class HighGradeComponent implements OnInit {
     private messageService: MessageService,
   ) {
     this.getData();
+    this.getCart();
   }
 
   ngOnInit(): void {
@@ -50,19 +52,54 @@ export class HighGradeComponent implements OnInit {
     })
   }
 
+  getCart() {
+    if (this.user$.subscribe((user) => {
+      if (user) {
+        const ref = collection(this.firestore, 'users', user.uid, 'carts');
+        getDocs(ref).then((response) => {
+          response.docs.map((item) => {
+            this.cartList.push(item.data());
+          })
+        })
+      }
+    }))
+      return;
+  }
+
   addToCart() {
     if (this.user$.subscribe((user) => {
       if (user) {
         const ref = collection(this.firestore, 'users', user.uid, 'carts');
-        addDoc(ref, {
-          product: this.productDetail,
-          amount: this.amount,
-        }).then(() => {
-          this.messageService.add({ 
-            severity: 'success', 
-            summary: 'สำเร็จ!', 
-            detail: 'เพิ่มสินค้าไปยังตะกร้าเรียบร้อย' });
-        })
+        if (this.cartList.length === 0) {
+          addDoc(ref, {
+            product: this.productDetail,
+            amount: this.amount,
+          }).then(() => {
+            this.messageService.add({ severity: 'success', summary: 'สำเร็จ', detail: 'เพิ่มสินค้าเข้าตะกร้าสำเร็จ' });
+            this.showDialog = false;
+            this.getCart();
+          })
+        }
+        else {
+          this.cartList.forEach((item: any) => {
+            if (item.product.id === this.productDetail.id) {
+              getDocs(ref).then((response) => {
+                response.docs.map((item) => {
+                  if (item.data()['product'].id === this.productDetail.id) {
+                    updateDoc(doc(this.firestore, 'users', user.uid, 'carts', item.id), {
+                      amount: item.data()['amount'] + this.amount
+                    }).then(() => {
+                      this.messageService.add({ severity: 'warn', summary: 'มีสินค้ารายการนี้อยู่ในตระกร้าของคุณเเล้ว', detail: 'ทำการเพิ่มจำนวนสินค้าแทน' });
+                      this.showDialog = false;
+                      this.getCart();
+                    })
+                  }
+                })
+
+              })
+            }
+          })
+        }
       }
       else {
         this.messageService.add({

@@ -33,7 +33,6 @@ export class PerfectGradeComponent implements OnInit {
       this.perfectGradeList = [...response.docs.map((item) => {
         return { ...item.data(), id: item.id }
       })]
-      console.log(this.perfectGradeList);
     })
   }
   

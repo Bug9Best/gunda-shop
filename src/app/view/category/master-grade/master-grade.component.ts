@@ -34,7 +34,6 @@ export class MasterGradeComponent implements OnInit {
       this.masterGradeList = [...response.docs.map((item) => {
         return { ...item.data(), id: item.id }
       })]
-      console.log(this.masterGradeList);
     })
   }
 
