@@ -16,7 +16,7 @@
 
                 <div class="flex-1 self-center">
                     <p>{{ data.product.name }}</p>
-                    <p class="font-bold">{{ data.product.price + " บาท" }}</p>
+                    <p class="font-bold">{{ data.product.price | currency:'symbol-narrow':'' }} บาท</p>
                 </div>
 
                 <div class="flex-2 flex-col w-5 self-center">
@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="flex-1 self-center text-right font-bold">
-                    <p>{{ data.product.price * data.amount }}</p>
+                    <p>{{ data.product.price * data.amount | currency:'symbol-narrow':'' }}</p>
                 </div>
             </div>
             <hr class="mt-5">
@@ -48,7 +48,7 @@
 
     <div class="flex flex-row justify-end mt-4 font-bold">
         <p class="flex w-36 text-right">TOTAL :</p>
-        <p class="flex">{{ totalPrice }}</p>
+        <p class="flex">{{ totalPrice | currency:'symbol-narrow':'' }}</p>
     </div>
 
     <p class="text-right font-extralight text-base mt-3 opacity-50">Shipping & taxes calculated at checkout</p>
@@ -76,10 +76,22 @@
 
 <p-dialog [(visible)]="showDialog" [resizable]="false" [modal]="true" [draggable]="false" [style]="{width: '75vw'}">
     <div class="flex content-center	 justify-items-center">
-        <p class="text-4xl font-bold">คำสั่งซื้อ</p>
+        <p class="text-3xl font-bold">คำสั่งซื้อ</p>
         <p class="text-2xl mt-1 ml-2">#{{ orderNo }}</p>
     </div>
+    <div class="mt-4 ml-2">
+        <p class="text-xl">มีสินค้าที่ต้องจัดส่งทั้งหมด {{ cartList.length }} ชิ้น</p>
+    </div>
+    <div class="mt-2 ml-2">
+        <p class="text-xl">ราคาทั้งหมด {{ totalPrice | currency:'symbol-narrow':'' }} บาท</p>
+    </div>
 
+    <div class="mt-8">
+        <p class="text-2xl font-bold">ที่อยู่ที่จัดส่ง</p>
+    </div>
+    <div class="mt-2 ml-2">
+        <p class="text-xl">{{ address }}</p>
+    </div>
 
     <ng-template pTemplate="footer">
         <div class="grid grid-flow-row-dense grid-cols-12 gap-4">

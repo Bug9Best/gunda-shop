@@ -71,7 +71,7 @@ body::-webkit-scrollbar {
     }
 
     .category-item {
-        @apply rounded-lg border border-neutral-300 group-hover:opacity-90 group-hover:border-neutral-800
+        @apply rounded-md  group-hover:opacity-80 
         shadow-[inset_00_-15px_50px_1px_rgba(0,0,0,0.15)];
     }
 
