@@ -35,7 +35,7 @@ export class RealGradeComponent implements OnInit {
       })]
     })
   }
-  
+
   showDetail(id: any) {
     this.showDialog = true;
     this.realGradeList.forEach((item: any) => {
@@ -54,22 +54,26 @@ export class RealGradeComponent implements OnInit {
     if (this.user$.subscribe((user) => {
       if (user) {
         const ref = collection(this.firestore, 'users', user.uid, 'carts');
-        addDoc(ref, {
-          product: this.productDetail,
-          amount: this.amount,
-        }).then(() => {
-          this.messageService.add({ 
-            severity: 'success', 
-            summary: 'สำเร็จ!', 
-            detail: 'เพิ่มสินค้าไปยังตะกร้าเรียบร้อย' });
+        getDocs(ref).then((response) => {
+          let isExist = false;
+          response.docs.map((item) => {
+            if (item.data()['product']['id'] === this.productDetail.id) {
+              isExist = true;
+              this.messageService.add({ severity: 'warn', summary: 'คำเตือน!', detail: 'มีสินค้ารายการนี้อยู่ในตระกร้าของคุณเเล้ว' });
+            }
+          })
+          if (isExist === false) {
+            addDoc(ref, {
+              product: this.productDetail,
+              amount: this.amount
+            })
+              .then(() => { this.messageService.add({ severity: 'success', summary: 'สำเร็จ!', detail: 'เพิ่มสินค้าลงตะกร้าสำเร็จ' }); }
+              )
+          }
         })
       }
       else {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'เกิดข้อผิดพลาด',
-          detail: 'ทำการล็อคอินก่อนเพื่อเพิ่มสินค้าเข้าตะกร้า'
-        });
+        this.messageService.add({ severity: 'error', summary: 'ผิดพลาด!', detail: 'กรุณาเข้าสู่ระบบก่อน' });
       }
     }))
       this.showDialog = false;

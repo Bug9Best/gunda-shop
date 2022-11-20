@@ -7,12 +7,16 @@ import { UserService } from 'src/app/service/user/user.service';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  styleUrls: ['./cart.component.scss'],
+  providers: [ConfirmationService, MessageService]
 })
 export class CartComponent implements OnInit {
   totalPrice: number = 0;
+  showDialog: boolean = false;
+  orderNo: string = "";
   user$ = this.userService.getCurrentUser();
   cartList: any = [];
+  reset = false;
 
   constructor(
     private firestore: Firestore,
@@ -22,21 +26,21 @@ export class CartComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getCart();
+    this.getCart(false);
+    this.generateOrder();
   }
 
-  getCart() {
+  getCart(reset: boolean) {
     if (this.user$.subscribe((user) => {
       if (user) {
+        if (reset === true) {
+          this.totalPrice = 0;
+          this.cartList = [];
+          this.reset = false;
+        }
         const ref = collection(this.firestore, 'users', user.uid, 'carts');
         getDocs(ref).then((response) => {
           response.docs.map((item) => {
-            if (this.cartList.length >= 1) {
-              for (let i = 0; i < this.cartList.length; i++) {
-                this.cartList.pop(i);
-              }
-              this.totalPrice = 0;
-            }
             this.cartList.push(item.data());
             this.totalPrice += item.data()['product']['price'] * item.data()['amount'];
           })
@@ -104,7 +108,7 @@ export class CartComponent implements OnInit {
                     summary: 'สำเร็จ!',
                     detail: 'อัพเดตข้อมูลสำเร็จ'
                   });
-                  this.getCart();
+                  this.getCart(true);
                 })
                 .catch((error) => {
                   this.messageService.add({
@@ -135,7 +139,7 @@ export class CartComponent implements OnInit {
                     summary: 'สำเร็จ!',
                     detail: 'อัพเดตข้อมูลสำเร็จ'
                   });
-                  this.getCart();
+                  this.getCart(true);
                 })
                 .catch((error) => {
                   this.messageService.add({
@@ -152,5 +156,20 @@ export class CartComponent implements OnInit {
       return;
   }
 
+  generateOrder() {
+    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < 10; i++) {
+      this.orderNo += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+  }
+
+  submit() {
+    this.showDialog = true;
+  }
+
+  confirm() {
+
+  }
 }
 
