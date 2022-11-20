@@ -35,7 +35,7 @@ export class PerfectGradeComponent implements OnInit {
       })]
     })
   }
-  
+
   showDetail(id: any) {
     this.showDialog = true;
     this.perfectGradeList.forEach((item: any) => {
@@ -58,10 +58,7 @@ export class PerfectGradeComponent implements OnInit {
           product: this.productDetail,
           amount: this.amount,
         }).then(() => {
-          this.messageService.add({ 
-            severity: 'success', 
-            summary: 'สำเร็จ!', 
-            detail: 'เพิ่มสินค้าไปยังตะกร้าเรียบร้อย' });
+          this.messageService.add({ severity: 'success', summary: 'สำเร็จ!', detail: 'เพิ่มสินค้าไปยังตะกร้าเรียบร้อย' });
         })
       }
       else {
