@@ -51,7 +51,6 @@ import {CarouselModule} from 'primeng/carousel';
 import {ImageModule} from 'primeng/image';
 import {BadgeModule} from 'primeng/badge';
 
-
 let modules = [
   ButtonModule,
   SplitButtonModule,
