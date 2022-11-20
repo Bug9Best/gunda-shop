@@ -1,1 +1,72 @@
-<p>cart works!</p>
+<div *ngIf="cartList.length; else haveNoData" class="mx-auto w-full max-w-screen-lg px-4 sm:px-6 lg:px-0 my-20">
+    <div class="flex flex-col">
+        <p class="align-middle text-center font-bold text-4xl">ตะกร้า</p>
+        <div class="flex flex-row justify-between mt-9 mb-4 font-bold text-2xl">
+            <p class="flex w-96">สินค้า</p>
+            <p class="flex">จำนวน</p>
+            <p class="flex">ราคา</p>
+        </div>
+        <hr>
+
+        <div *ngFor="let data of cartList">
+            <div class="flex flex-row justify-between justify-items-center gap-28">
+                <div class="flex justify-self-start">
+                    <img class="max-w-xs w-40 mt-4" [src]="data.product.productURL">
+                </div>
+
+                <div class="flex-1 self-center">
+                    <p>{{ data.product.name }}</p>
+                    <p class="font-bold">{{ data.product.price + " บาท" }}</p>
+                </div>
+
+                <div class="flex-2 flex-col w-5 self-center">
+                    <div class="flex border-[1px] border-black w-32 h-10 justify-between">
+                        <div>
+                            <button (click)="decreaseAmount(data)" class="w-10 h-[39px] text-black font-bold hover:text-gray-700">-</button>
+                        </div>
+                        <div class="self-center font-bold">
+                            <p id="num">{{ data.amount }}</p>
+                        </div>
+                        <div>
+                            <button (click)="increaseAmount(data)"
+                                class="w-10 h-[39px] text-black font-bold hover:text-gray-700">+</button>
+                        </div>
+                    </div>
+                    <button class="text-black font-bold font hover:text-gray-700 mt-3 ml-8"
+                        (click)="removeItem($event,data)">REMOVE</button>
+                    <p-confirmPopup></p-confirmPopup>
+                </div>
+
+                <div class="flex-1 self-center text-right font-bold">
+                    <p>{{ data.product.price * data.amount }}</p>
+                </div>
+            </div>
+            <hr class="mt-5">
+        </div>
+    </div>
+
+    <div class="flex flex-row justify-end mt-4 font-bold">
+        <p class="flex w-36 text-right">TOTAL :</p>
+        <p class="flex">{{ totalPrice }}</p>
+    </div>
+
+    <p class="text-right font-extralight text-base mt-3 opacity-50">Shipping & taxes calculated at checkout</p>
+
+    <div class="flex flex-row justify-end mt-4 mb-40">
+        <button class="bg-black text-white font-bold px-4 py-2 rounded hover:bg-gray-700">CHECKOUT</button>
+    </div>
+</div>
+
+<ng-template #haveNoData>
+    <div class="container font-inter md:mx-auto h-[500px] w-[700px] mt-[20em] font-sans">
+        <div class="gap-y-80 columns-1 text-center mt-[12em]">
+            <h1 class="text-2xl mb-7">ตะกร้าของคุณยังว่างอยู่</h1>
+            <div class="text-2xl font-bold border-1 max-w-[10em] text-center ml-[9.5em]">
+                <button routerLink="/home"
+                    class="p-2 w-[10em] rounded-none text-white bg-black drop-shadow-2xl hover:bg-slate-900">
+                    Click here
+                </button>
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PrimeNGModule } from './modules/primeng.module';
 
-import { IntroComponent } from './view/intro/intro.component';
 import { HomeComponent } from './view/home/home.component';
 import { AccountComponent } from './view/account/account.component';
 import { CartComponent } from './view/cart/cart.component';
@@ -19,22 +18,21 @@ import { PerfectGradeComponent } from './view/category/perfect-grade/perfect-gra
 import { ToolComponent } from '../app/view/category/tool/tool.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { ModalComponent } from './component/modal/modal.component';
-import { SearchComponent } from './view/search/search.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FooterComponent } from './component/footer/footer.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
 
-    IntroComponent,
     HomeComponent,
     AccountComponent,
     CartComponent,
@@ -46,8 +44,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PerfectGradeComponent,
     ToolComponent,
     NavbarComponent,
-    SearchComponent,
-    ModalComponent
+    ModalComponent,
+    FooterComponent
   ],
   imports: [
     ToastModule,
@@ -56,7 +54,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PrimeNGModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    MatFormFieldModule,
+    HttpClientModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
@@ -64,7 +62,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
 
   providers: [
-    MessageService
+    MessageService,
+    ConfirmationService,
   ],
   bootstrap: [AppComponent]
 })

@@ -49,6 +49,8 @@ import { FileUploadModule } from 'primeng/fileupload';
 import {GalleriaModule} from 'primeng/galleria';
 import {CarouselModule} from 'primeng/carousel';
 import {ImageModule} from 'primeng/image';
+import {BadgeModule} from 'primeng/badge';
+
 
 let modules = [
   ButtonModule,
@@ -98,7 +100,8 @@ let modules = [
   FileUploadModule,
   GalleriaModule,
   CarouselModule,
-  ImageModule
+  ImageModule,
+  BadgeModule
 ]
 
 @NgModule({

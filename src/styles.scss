@@ -11,13 +11,19 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+* {
+    font-family: 'Mitr', sans-serif;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @tailwind variants;
 
 @layer components {
-
     .item-navbar{
         @apply px-3 py-2 rounded-md text-base font-bold
         text-neutral-100

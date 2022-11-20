@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { IntroComponent } from './view/intro/intro.component';
 import { HomeComponent } from './view/home/home.component';
 import { AccountComponent } from './view/account/account.component';
 import { CartComponent } from './view/cart/cart.component';
@@ -11,14 +10,15 @@ import { RealGradeComponent } from './view/category/real-grade/real-grade.compon
 import { MasterGradeComponent } from './view/category/master-grade/master-grade.component';
 import { PerfectGradeComponent } from './view/category/perfect-grade/perfect-grade.component';
 import { ToolComponent } from './view/category/tool/tool.component';
-import { SearchComponent } from './view/search/search.component';
 
+//import auth guard
+import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
+const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 
 const routes: Routes = [
-  {
-    path: "intro",
-    component: IntroComponent
-  },
+
   {
     path: "home",
     component: HomeComponent
@@ -33,7 +33,8 @@ const routes: Routes = [
   },
   {
     path: "login",
-    component: SigninComponent
+    component: SigninComponent,
+    ...canActivate(redirectLoggedInToHome),
   },
   {
     path: "register",
@@ -60,12 +61,8 @@ const routes: Routes = [
     component: ToolComponent
   },
   {
-    path: "search",
-    component: SearchComponent
-  },
-  {
     path: "",
-    redirectTo: "intro",
+    redirectTo: "home",
     pathMatch: "full"
   },
 ];

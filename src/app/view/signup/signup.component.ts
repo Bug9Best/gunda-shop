@@ -12,6 +12,9 @@ import {
   ValidatorFn,
   AbstractControl,
 } from '@angular/forms';
+import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
+import { doc } from '@firebase/firestore';
+import { Firestore, setDoc } from '@angular/fire/firestore';
 
 export function passwordsMatchValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -33,7 +36,7 @@ export function passwordsMatchValidator(): ValidatorFn {
 
 })
 export class SignupComponent implements OnInit {
-  showValid= true;
+  showValid = true;
 
   userForm = new FormGroup({
     firstname: new FormControl('', [Validators.required]),
@@ -50,6 +53,9 @@ export class SignupComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private messageService: MessageService,
+
+    private auth: Auth,
+    private fireStore: Firestore
   ) { }
 
   ngOnInit(): void {
@@ -57,11 +63,10 @@ export class SignupComponent implements OnInit {
 
   submit() {
     const { firstname, lastname, email, password } = this.userForm.value;
-
     if (!this.userForm.valid || !firstname || !lastname || !password || !email) {
       this.messageService.add({
         severity: 'error',
-        summary: 'ข้อมูลไม่ถูกต้อง',
+        summary: 'ข้อมูลไม่ถูกต้อง!',
         detail: 'ตรวจสอบข้อมูลอีกครั้ง',
         life: 3000,
       });
@@ -73,10 +78,16 @@ export class SignupComponent implements OnInit {
       .signUp(email, password)
       .pipe(
         switchMap(({ user: { uid } }) =>
-          this.userService.addUser({ uid, email, firstname: firstname, lastname: lastname, photoURL: '' }),
+          this.userService.addUser({ uid, email, firstname: firstname, lastname: lastname, photoURL: '', address: '' }),
         )
       )
       .subscribe(() => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'สำเร็จ!',
+          detail: 'สมัครสมาชิกสำเร็จ',
+          life: 3000,
+        });
         this.router.navigate(['/home']);
       });
   }
