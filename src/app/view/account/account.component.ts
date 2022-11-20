@@ -3,7 +3,7 @@ import { UserService } from 'src/app/service/user/user.service';
 import { User } from 'src/app/model/user';
 import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 import { FormControl, FormGroup } from '@angular/forms';
-import { updateDoc, doc, Firestore } from '@angular/fire/firestore';
+import { addDoc, getDocs, updateDoc, deleteDoc, Firestore, collection, doc, } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-account',
@@ -14,6 +14,7 @@ import { updateDoc, doc, Firestore } from '@angular/fire/firestore';
 export class AccountComponent implements OnInit {
   user$ = this.userService.getCurrentUser();
   readOnly = true;
+  userOrder: any = [];
 
   userData: User = {
     uid: '',
@@ -29,12 +30,13 @@ export class AccountComponent implements OnInit {
   });
 
   constructor(
-    private userService: UserService,
-    private confirmationService: ConfirmationService,
-    private messageService: MessageService,
     private firestore: Firestore,
-  ) { 
+    private userService: UserService,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
+  ) {
     this.getUser();
+    this.getOrder()
   }
 
   ngOnInit(): void {
@@ -60,6 +62,21 @@ export class AccountComponent implements OnInit {
 
   cancleEdit() {
     this.readOnly = true;
+  }
+
+  getOrder() {
+    if (this.user$.subscribe((user) => {
+      if (user) {
+        const ref = collection(this.firestore, 'users', user.uid, 'orders');
+        getDocs(ref).then((response) => {
+          this.userOrder = [...response.docs.map((item) => {
+            console.log(item.data());
+            return { ...item.data(), id: item.id }
+          })]
+        })
+      }
+    }))
+      return;
   }
 
   submitEdit(event: Event) {

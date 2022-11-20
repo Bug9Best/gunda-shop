@@ -9,7 +9,18 @@
             <div class="flex-auto">
                 <h1 class="font-bold text-2xl mb-1 ">คำสั่งซื้อของฉัน</h1>
                 <hr>
-                <p class="mt-2 text-lg text-neutral-500">คุณยังไม่มีคำสั่งซื้อในตอนนี้</p>
+
+                <div *ngIf="userOrder ; else haveNoData">
+                    <div *ngFor="let data of userOrder" class="card mt-2 p-3 shadow-sm">
+                        <p class="text-xl"><strong>คำสั่งซื้อที่ : </strong>{{ data.orderNo }}</p>
+                        <p class="text-xl"><strong>ราคา : </strong>{{ data.totalPrice }}</p>
+                        <p class="text-xl"><strong>จัดส่งที่ : </strong>{{ data.address }}</p>
+                    </div>
+                </div>
+
+                <ng-template #haveNoData>
+                    <p class="mt-2 text-lg text-neutral-500">คุณยังไม่มีคำสั่งซื้อในตอนนี้</p>
+                </ng-template>
             </div>
 
             <div class="flex-auto w-20">
@@ -48,7 +59,9 @@
     <div class="goLogin w-[50%] mt-60">
         <p class="mt-40 text-2xl">เพื่อที่จะเข้าถึงฟีเจอร์ account</p>
         <p class="text-2xl">คุณต้องทำการล็อคอินก่อน</p>
-        <button class="mt-5 py-3 min-w-full rounded text-lg text-white bg-neutral-800 border border-neutral-800 text-center side" routerLink="../login">ไปหน้าล็อคอิน</button>
+        <button
+            class="mt-5 py-3 min-w-full rounded text-lg text-white bg-neutral-800 border border-neutral-800 text-center side"
+            routerLink="../login">ไปหน้าล็อคอิน</button>
     </div>
 </ng-template>
 

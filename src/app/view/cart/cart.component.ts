@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { addDoc, getDocs, updateDoc, deleteDoc, Firestore, collection, doc } from '@angular/fire/firestore';
+import { addDoc, getDocs, updateDoc, deleteDoc, Firestore, collection, doc, } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { UserService } from 'src/app/service/user/user.service';
 
@@ -17,8 +18,10 @@ export class CartComponent implements OnInit {
   user$ = this.userService.getCurrentUser();
   cartList: any = [];
   reset = false;
+  address = "";
 
   constructor(
+    private router: Router,
     private firestore: Firestore,
     private userService: UserService,
     private messageService: MessageService,
@@ -33,6 +36,7 @@ export class CartComponent implements OnInit {
   getCart(reset: boolean) {
     if (this.user$.subscribe((user) => {
       if (user) {
+        this.address = user.address || "";
         if (reset === true) {
           this.totalPrice = 0;
           this.cartList = [];
@@ -169,7 +173,34 @@ export class CartComponent implements OnInit {
   }
 
   confirm() {
+    this.user$.subscribe((user) => {
+      if (user) {
+        const ref = collection(this.firestore, 'users', user.uid, 'orders');
+        addDoc(ref, {
+          orderNo: this.orderNo,
+          totalPrice: this.totalPrice,
+          address: this.address,
+          cartList: this.cartList,
+          status: 'รอการชำระเงิน',
+        })
+          .then(() => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'สำเร็จ!',
+              detail: 'สั่งซื้อสินค้าสำเร็จ'
+            });
 
+            this.router.navigate(['/account']);
+          })
+          .catch((error) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'ล้มเหลว!',
+              detail: error
+            });
+          })
+      }
+    })
+    this.showDialog = false;
   }
 }
-
