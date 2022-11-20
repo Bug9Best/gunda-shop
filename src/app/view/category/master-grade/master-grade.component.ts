@@ -38,6 +38,7 @@ export class MasterGradeComponent implements OnInit {
   }
 
   showDetail(id: any) {
+    this.amount = 1;
     this.showDialog = true;
     this.masterGradeList.forEach((item: any) => {
       if (item.id === id) {

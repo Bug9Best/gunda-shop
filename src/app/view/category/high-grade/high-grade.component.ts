@@ -37,6 +37,7 @@ export class HighGradeComponent implements OnInit {
   }
 
   showDetail(id: any) {
+    this.amount = 1;
     this.showDialog = true;
     this.highGradeList.forEach((item: any) => {
       if (item.id === id) {
@@ -67,8 +68,9 @@ export class HighGradeComponent implements OnInit {
               product: this.productDetail,
               amount: this.amount
             })
-              .then(() => { this.messageService.add({ severity: 'success', summary: 'สำเร็จ!', detail: 'เพิ่มสินค้าลงตะกร้าสำเร็จ' }); }
-              )
+              .then(() => {
+                this.messageService.add({ severity: 'success', summary: 'สำเร็จ!', detail: 'เพิ่มสินค้าลงตะกร้าสำเร็จ' });
+              })
           }
         })
       }
@@ -76,7 +78,7 @@ export class HighGradeComponent implements OnInit {
         this.messageService.add({ severity: 'error', summary: 'ผิดพลาด!', detail: 'กรุณาเข้าสู่ระบบก่อน' });
       }
     }))
-      this.showDialog = false;
+    this.showDialog = false;
   }
 
   decrease() {

@@ -37,6 +37,7 @@ export class RealGradeComponent implements OnInit {
   }
 
   showDetail(id: any) {
+    this.amount = 1;
     this.showDialog = true;
     this.realGradeList.forEach((item: any) => {
       if (item.id === id) {

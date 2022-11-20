@@ -55,7 +55,6 @@ export class CartComponent implements OnInit {
   }
 
   removeItem(event: any, item: any) {
-    console.log(this.cartList);
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       message: 'คุณต้องการลบข้อมูลดังกล่าวใช่หรือไม่',

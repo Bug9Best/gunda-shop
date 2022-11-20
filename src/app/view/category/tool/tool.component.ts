@@ -40,6 +40,7 @@ export class ToolComponent implements OnInit {
 
 
   showDetail(id: any) {
+    this.amount = 1;
     this.showDialog = true;
     this.toolList.forEach((item: any) => {
       if (item.id === id) {
