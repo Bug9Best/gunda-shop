@@ -70,7 +70,6 @@ export class AccountComponent implements OnInit {
         const ref = collection(this.firestore, 'users', user.uid, 'orders');
         getDocs(ref).then((response) => {
           this.userOrder = [...response.docs.map((item) => {
-            console.log(item.data());
             return { ...item.data(), id: item.id }
           })]
         })
