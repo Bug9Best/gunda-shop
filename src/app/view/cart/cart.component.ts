@@ -174,6 +174,7 @@ export class CartComponent implements OnInit {
   confirm() {
     this.user$.subscribe((user) => {
       if (user) {
+        const deleteRef = collection(this.firestore, 'users', user.uid, 'carts');
         const ref = collection(this.firestore, 'users', user.uid, 'orders');
         addDoc(ref, {
           orderNo: this.orderNo,
@@ -188,8 +189,15 @@ export class CartComponent implements OnInit {
               summary: 'สำเร็จ!',
               detail: 'สั่งซื้อสินค้าสำเร็จ'
             });
+            getDocs(deleteRef).then((response) => {
+              response.docs.map((i) => {
+                deleteDoc(i.ref)
+                  .then(() => {
 
-            this.router.navigate(['/account']);
+                    this.router.navigate(['/account']);
+                  })
+              })
+            })
           })
           .catch((error) => {
             this.messageService.add({
